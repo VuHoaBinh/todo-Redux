@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.scss";
-import Mycomponent from "./ComponentA/Mycomponents";
 import ListToDo from "./ComponentB/ListToDo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +24,6 @@ function App() {
             <Route path="/todo" component={ListToDo} />
             <Route path="/user" component={ListUsers} />
             <Route path="/user/:id" component={DetailUser} />
-            <Route path="/about" component={Mycomponent} />
           </Switch>
         </header>
 
