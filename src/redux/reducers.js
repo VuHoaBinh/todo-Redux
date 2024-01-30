@@ -1,22 +1,31 @@
 const initState = {
-  users: [
-    { id: "1", link: "binh dep trai" },
-    { id: "2", link: "binh dep trai qua nha" },
-    { id: "3", link: "binh dep trai that ay" },
+  Links: [
+    { id: "1", link: "https://www.youtube.com/watch?v=dKU6Z5e3j1w&t=680s" },
   ],
-  posts: [],
 };
 
 const rootReducers = (state = initState, action) => {
   switch (action.type) {
-    // case "DELETE":
-
-    // case "ADD":
-
-    // case "UPDATE":
-
-    // case "FIND":
-
+    case "ADD_LINK":
+      return {
+        ...state,
+        Links: [...state.Links, action.payload],
+      };
+    // console.log(this.state.Links);
+    case "UPDATE_LINK":
+      return {
+        ...state,
+        Links: state.Links.map((link) =>
+          link.id === action.payload.id
+            ? { ...link, text: action.payload.text }
+            : link
+        ),
+      };
+    case "DELETE_LINK":
+      return {
+        ...state,
+        Links: state.Links.filter((link) => link.id !== action.payload),
+      };
     default:
       return state;
   }

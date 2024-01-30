@@ -4,12 +4,11 @@ import { toast } from "react-toastify";
 import AddLink from "./AddComponents";
 import "./ComponentA.scss";
 class Home extends React.Component {
+  // { id: "1", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
+  // { id: "2", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
+  // { id: "3", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
   state = {
-    listLinks: [
-      { id: "1", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
-      { id: "2", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
-      { id: "3", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
-    ],
+    listLinks: [],
     updateLink: {},
   };
 
@@ -20,16 +19,20 @@ class Home extends React.Component {
     this.setState({
       listLinks: addLink,
     });
+
+    this.props.addLinkRedux(element);
   };
 
   // delete link
   deleteLink = (element) => {
-    console.log("deleteTodo: ", element);
+    console.log("id delete: ", element);
     let currentLink = this.state.listLinks;
     currentLink = currentLink.filter((item) => item.id !== element.id);
+    this.props.removeLinkRedux(element.id);
     this.setState({
       listLinks: currentLink,
     });
+
     toast.success("Delete link successfully!");
   };
 
@@ -56,16 +59,19 @@ class Home extends React.Component {
     }
   };
   UpdateLink = (element) => {
-    let { updateLink, listLinks } = this.state;
+    // listLinks
+    let { updateLink } = this.state;
+    let { dataRedux } = this.props;
     let isEmptyObj = Object.keys(updateLink).length === 0;
 
     if (isEmptyObj === false && updateLink.id === element.id) {
-      let listLinkCopy = [...listLinks];
+      let listLinkCopy = [...dataRedux];
       let get_id = listLinkCopy.findIndex((item) => item.id === element.id); // get id
-
       let isCheckValid = this.checkValid(updateLink.link) === true;
+
       if (isCheckValid) {
         listLinkCopy[get_id].link = updateLink.link;
+        this.props.updateLinkRedux(get_id, updateLink.link);
         this.setState({
           listLinks: listLinkCopy,
           updateLink: {},
@@ -90,17 +96,18 @@ class Home extends React.Component {
   };
 
   render() {
+    // listLinks
     let { listLinks, updateLink } = this.state;
-
+    let { dataRedux } = this.props;
     let isEmptyObj = Object.keys(updateLink).length === 0; // check
     return (
       <>
         <h1>Add link video Youtube && Tiktok && IG</h1>
         <AddLink addNewLink={this.addNewLink} />
         <div className="content">
-          {listLinks &&
-            listLinks.length > 0 &&
-            listLinks.map((item, index) => {
+          {dataRedux &&
+            dataRedux.length > 0 &&
+            dataRedux.map((item, index) => {
               return (
                 <>
                   <div className="todo-child" key={item.id}>
@@ -157,14 +164,17 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { dataRedux: state.users };
+  return { dataRedux: state.Links };
 };
+// deleteUserRedux: (userDelete) =>
+//   dispatch({ type: "DELETE", payload: userDelete }),
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteUserRedux: (userDelete) =>
-      dispatch({ type: "DELETE", payload: userDelete }),
-    addUserRedux: () => dispatch({ type: "ADD" }),
+    addLinkRedux: (link) => dispatch({ type: "ADD_LINK", payload: link }),
+    removeLinkRedux: (id) => dispatch({ type: "DELETE_LINK", payload: id }),
+    updateLinkRedux: (id, link) =>
+      dispatch({ type: "UPDATE_LINK", payload: { id, link } }),
   };
 };
 

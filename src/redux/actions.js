@@ -1,19 +1,14 @@
-// export const addContact = (contact) => ({
-//     type: "ADD",
-//     payload: contact,
-//   });
+export const addLinkRedux = (link) => ({
+  type: "ADD_LINK",
+  payload: link,
+});
 
-//   export const updateContact = (contact) => ({
-//     type: "UPDATE",
-//     payload: contact,
-//   });
+export const updateLinkRedux = (id, link) => ({
+  type: "UPDATE_LINK",
+  payload: { id, link },
+});
 
-//   export const deleteContact = (id) => ({
-//     type: "DELETE",
-//     payload: id,
-//   });
-
-//   export const findContact = (payload) => ({
-//     type: "FIND",
-//     payload,
-//   });
+export const removeLinkRedux = (id) => ({
+  type: "DELETE_LINK",
+  payload: id,
+});
