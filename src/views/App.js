@@ -5,10 +5,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Nav from "./nav/Nav";
-import Home from "./ComponentA/Home";
-import ListToDo from "./ComponentB/ListToDo";
-import ListUsers from "./ComponentC/ListUsers";
-import DetailUser from "./ComponentC/DetailUser";
+import AddLink from "./ComponentA/AddLink";
+import ShowLinks from "./ComponentB/ShowLinks";
+import RunLinks from "./ComponentC/RunLinks";
 
 function App() {
   return (
@@ -19,10 +18,9 @@ function App() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Switch>
-            <Route path="/" exact={"true"} component={Home} />
-            <Route path="/todo" component={ListToDo} />
-            <Route path="/user" component={ListUsers} />
-            <Route path="/user/:id" component={DetailUser} />
+            <Route path="/" exact={"true"} component={AddLink} />
+            <Route path="/todo" component={ShowLinks} />
+            <Route path="/user" component={RunLinks} />
           </Switch>
         </header>
 

@@ -1,12 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import AddLink from "./AddComponents";
-import "./ComponentA.scss";
-class Home extends React.Component {
-  // { id: "1", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
-  // { id: "2", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
-  // { id: "3", link: "https://www.youtube.com/watch?v=DB_jbSQXaOs" },
+import "./styles.scss";
+
+class ListToDo extends React.Component {
   state = {
     listLinks: [],
     updateLink: {},
@@ -96,14 +93,11 @@ class Home extends React.Component {
   };
 
   render() {
-    // listLinks
     let { listLinks, updateLink } = this.state;
     let { dataRedux } = this.props;
-    let isEmptyObj = Object.keys(updateLink).length === 0; // check
+    let isEmptyObj = Object.keys(updateLink).length === 0;
     return (
       <>
-        <h1>Add link video Youtube && Tiktok && IG</h1>
-        <AddLink addNewLink={this.addNewLink} />
         <div className="content">
           {dataRedux &&
             dataRedux.length > 0 &&
@@ -162,21 +156,15 @@ class Home extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return { dataRedux: state.Links };
 };
-// deleteUserRedux: (userDelete) =>
-//   dispatch({ type: "DELETE", payload: userDelete }),
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addLinkRedux: (link) => dispatch({ type: "ADD_LINK", payload: link }),
     removeLinkRedux: (id) => dispatch({ type: "DELETE_LINK", payload: id }),
     updateLinkRedux: (id, link) =>
       dispatch({ type: "UPDATE_LINK", payload: { id, link } }),
   };
 };
-
-// export default withRouter(Home);
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(ListToDo);

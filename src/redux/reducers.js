@@ -1,7 +1,5 @@
 const initState = {
-  Links: [
-    { id: "1", link: "https://www.youtube.com/watch?v=dKU6Z5e3j1w&t=680s" },
-  ],
+  Links: [{ id: "1", link: "https://www.youtube.com/embed/QyKjBaHdQdw" }],
 };
 
 const rootReducers = (state = initState, action) => {
