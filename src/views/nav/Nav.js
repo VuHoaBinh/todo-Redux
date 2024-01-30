@@ -1,6 +1,6 @@
 import React from "react";
 import "./Nav.scss";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 class Nav extends React.Component {
   render() {
@@ -8,21 +8,15 @@ class Nav extends React.Component {
       <div>
         <Router>
           <div className="topnav">
-            <a className="active" href="/" exact={"true"}>
+            <a className="active" href="/Home" exact={"true"}>
               Component A
             </a>
-            <a href="/todo">Component B</a>
-            <a href="/user">Component C</a>
-
-            {/* <NavLink to="/" activeClassName="active" exact={true}>
-              Component A
-            </NavLink>
-            <NavLink to="/todo" activeClassName="active">
+            <a className="active" href="/ListOfLinks">
               Component B
-            </NavLink>
-            <NavLink to="/about" activeClassName="active">
+            </a>
+            <a className="active" href="/ShowLinks">
               Component C
-            </NavLink> */}
+            </a>
           </div>
         </Router>
       </div>
