@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import InstagramEmbed from "react-instagram-embed";
 
 class ListUsers extends React.Component {
   slipLink = (videoUrl) => {
