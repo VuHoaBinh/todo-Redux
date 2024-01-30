@@ -94,7 +94,8 @@ class ListToDo extends React.Component {
 
   render() {
     let { listLinks, updateLink } = this.state;
-    let { dataRedux } = this.props;
+    let { dataLinkRedux } = this.props;
+    let dataRedux = [...dataLinkRedux].reverse();
     let isEmptyObj = Object.keys(updateLink).length === 0;
     return (
       <>
@@ -157,7 +158,7 @@ class ListToDo extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { dataRedux: state.Links };
+  return { dataLinkRedux: state.Links };
 };
 
 const mapDispatchToProps = (dispatch) => {
