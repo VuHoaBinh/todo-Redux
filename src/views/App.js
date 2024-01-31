@@ -18,7 +18,7 @@ function App() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Switch>
-            <Route path="/Home" exact={"true"} component={AddLink} />
+            <Route path="/" exact={"true"} component={AddLink} />
             <Route path="/ListOfLinks" component={ShowLinks} />
             <Route path="/ShowLinks" component={RunLinks} />
           </Switch>
