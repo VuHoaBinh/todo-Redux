@@ -22,7 +22,7 @@ const rootReducers = (state = initState, action) => {
     case "DELETE_LINK":
       return {
         ...state,
-        Links: state.Links.filter((link) => link.id !== action.payload),
+        Links: state.Links.filter((link) => link.id !== action.payload.id),
       };
     default:
       return state;
