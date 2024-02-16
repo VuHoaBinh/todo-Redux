@@ -1,46 +1,78 @@
-const ADD_LINK = "ADD_LINK";
-const REMOVE_LINK = "REMOVE_LINK";
-const COMPLETED_LINK = "COMPLETED_LINK";
-
-// Actions
-export const addTask = (task) => {
-  return { type: ADD_LINK, payload: { task: task } };
-};
-
-export const removeTask = (id) => {
-  return { type: REMOVE_LINK, payload: { id: id } };
-};
-
-export const task_completed = (id) => {
-  return {
-    type: COMPLETED_LINK,
-    payload: { id: id },
-  };
-};
-
-//Reducers
+import { createSlice } from "@reduxjs/toolkit";
 
 let id = 0;
-export default function rootReducers(state = [], action) {
-  switch (action.type) {
-    case ADD_LINK:
-      return [
-        ...state,
-        { id: ++id, task: action.payload.task, completed: false },
-      ];
+const taskSlice = createSlice({
+  name: "task",
+  initialState: [],
+  reducers: {
+    addTask: (state, action) => {
+      state.push({
+        id: ++id,
+        task: action.payload.task,
+        completed: false,
+      });
+    },
+    removeTask: (state, action) => {
+      const index = state.findIndex((task) => task.id !== action.payload.id);
+      // At position index, remove 1 items:
+      state.splice(index, 1);
+    },
+    completedTask: (state, action) => {
+      const index = state.findIndex((task) => task.id !== action.payload.id);
+      state[index].completed = true;
+    },
+  },
+});
 
-    case REMOVE_LINK:
-      return [state.filter((link) => link.id !== action.payload.id)];
+export const { addTask, removeTask, completedTask } = taskSlice.actions;
+export default taskSlice.reducer;
+// // Action Types
+// const ADD_TASK = "ADD_TASK";
+// const REMOVE_TASK = "REMOVE_TASK";
+// const TASK_COMPLETED = "TASK_COMPLETED";
 
-    case COMPLETED_LINK:
-      return [
-        state.map((link) =>
-          link.id === action.payload.id ? { ...link, completed: true } : link
-        ),
-      ];
+// // Actions
+// export const addTask = (task) => {
+//   return { type: ADD_TASK, payload: { task: task } };
+// };
 
-    default:
-      return state;
-  }
-}
-// export default rootReducers;
+// export const removeTask = (id) => {
+//   return { type: REMOVE_TASK, payload: { id: id } };
+// };
+
+// export const completedTask = (id) => {
+//   return { type: TASK_COMPLETED, payload: { id: id } };
+// };
+
+// // Reducer
+// let id = 0;
+
+// export default function reducer(state = [], action) {
+//   switch (action.type) {
+//     case ADD_TASK:
+//       return [
+//         ...state,
+//         {
+//           id: ++id,
+//           task: action.payload.task,
+//           completed: false,
+//         },
+//       ];
+
+//     case REMOVE_TASK:
+//       return state.filter((task) => task.id !== action.payload.id);
+
+//     case TASK_COMPLETED:
+//       return state.map((task) =>
+//         task.id === action.payload.id
+//           ? {
+//               ...task,
+//               completed: true,
+//             }
+//           : task
+//       );
+
+//     default:
+//       return state;
+//   }
+// }

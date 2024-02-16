@@ -1,15 +1,19 @@
 import store from "./store/configureStore";
-import { add, task_completed } from "./store/task";
+import { addTask, removeTask, completedTask } from "./store/task";
+import { addEmployees } from "./store/employee";
+// const unsubscribe = store.subscribe(() => {
+//   console.log("Updated", store.getState());
+// });
+store.dispatch({ type: "SHOW_ERROR", payload: { error: "loi ne" } });
 
-const unsubscribe = store.subscribe(() => {
-  console.log("update", store.getState());
-});
-
-store.dispatch(add("task 1"));
-store.dispatch(add("task 2"));
-
+store.dispatch(addTask("Task 1"));
+store.dispatch(addTask("Task 2"));
 console.log(store.getState());
 
-unsubscribe();
-store.dispatch(task_completed(2));
+// unsubscribe();
+store.dispatch(completedTask(2));
+
+store.dispatch(removeTask(1));
 console.log(store.getState());
+
+store.dispatch(addEmployees("Haaha"));

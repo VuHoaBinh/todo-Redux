@@ -1,7 +1,21 @@
-import { legacy_createStore as createStore } from "redux";
-// import { devToolsEnhancer } from "redux-devtools-extension";
-// import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./task";
-const store = createStore(reducer);
-// const store = configureStore(reducer);
+import { configureStore } from "@reduxjs/toolkit";
+import reducerEmployee from "./employee";
+import reducerTask from "./task";
+import log from "../middleware/log";
+import logger from "redux-logger";
+import error from "../middleware/error";
+const store = configureStore({
+  reducer: {
+    task: reducerTask,
+    employee: reducerEmployee,
+  },
+
+  // logger is history all state in redux.
+  middleware: (GetDefaultMiddleware) => [
+    ...GetDefaultMiddleware(),
+    logger,
+    error,
+  ],
+});
+
 export default store;
